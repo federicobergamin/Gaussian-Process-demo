@@ -1,7 +1,12 @@
 '''
 We try to create an interactive demo of a gaussian process.
 At the beginning we will have only the prior and then we can click
-on the plot, select a point and refit the gaussian process
+on the plot, select a point and refit the gaussian process and plot the posterior.
+With a double click you can get samples from the posterior
+
+Work created by Federico Bergamin
+for 02463 course "Active Machine Learning and agency" @ DTU
+Supervisor: Lars Kai Hansen
 '''
 
 import matplotlib.pyplot as plt
@@ -12,11 +17,17 @@ import threading
 SINGLE_DOUBLE_CLICK_INTERVAL = 0.2
 t = None
 
-#TODO: develop argparse
+#TODO: implement argparse
 parser = argparse.ArgumentParser(description='GAUSSIAN PROCESS DEMO')
+parser.add_argument("--lengthscale", type=float, default=1, help="lengthscale parameter of the squared-exponential kernel")
+parser.add_argument("--output_var", type=float, default = 1, help="lengthscale parameter of the squared-exponential kernel")
 
+args = parser.parse_args()
 
-
+print(args)
+# print(args.lengthscale)
+# print(args.output_var)
+#
 ## kernel definition
 def squared_exponential_kernel(a, b, lengthscale, variance):
     """ GP squared exponential kernel """
@@ -40,28 +51,30 @@ def squared_exponential_kernel(a, b, lengthscale, variance):
 
 def fit_GP(X, y, Xtest, kernel, lengthscale, kernel_variance, noise_variance, period=1):
     ## we should standardize the data
-    X = np.array(X).reshape(-1,1)
+    X = np.array(X).reshape(-1, 1)
     y = np.array(y)
     K = kernel(X, X, lengthscale, kernel_variance)
     L = np.linalg.cholesky(K + noise_variance * np.eye(len(X)))
 
     # compute the mean at our test points.
-    Lk = np.linalg.solve(L, kernel(X, Xtest, lengthscale, kernel_variance))
-    mu = np.dot(Lk.T, np.linalg.solve(L, y))
+    Ks = kernel(X, Xtest, lengthscale, kernel_variance)
+    alpha = np.linalg.solve(L.T, np.linalg.solve(L, y))  #
+    mu = Ks.T @ alpha
 
+    v = np.linalg.solve(L, Ks)
     # compute the variance at our test points.
-    K_ = kernel(Xtest, Xtest, lengthscale, kernel_variance)
+    Kss = kernel(Xtest, Xtest, lengthscale, kernel_variance)
     # print(K_.shape)
     # s2 = np.diag(K_) - np.sum(Lk ** 2, axis=0)
-    covariance = K_ - Lk.T @ Lk
+    covariance = Kss - (v.T @ v)
     # print(covariance.shape)
     # s = np.sqrt(s2)
     return mu, covariance
 
 
 ## parameters definition
-lengthscale = 1 # determines the lengths of the wiggle
-kernel_variance = 1 # scale factor
+lengthscale = args.lengthscale # determines the lengths of the wiggle
+kernel_variance = args.output_var # scale factor
 noise_var = 0.005
 period = 3
 n_test_point = 100

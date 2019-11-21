@@ -20,8 +20,9 @@ t = None
 #TODO: implement argparse
 parser = argparse.ArgumentParser(description='GAUSSIAN PROCESS DEMO')
 parser.add_argument("--lengthscale", type=float, default=1, help="lengthscale parameter of the squared-exponential kernel")
-parser.add_argument("--output_var", type=float, default = 1, help="lengthscale parameter of the squared-exponential kernel")
-
+parser.add_argument("--output_var", type=float, default = 1, help="oputput variance of the squared-exponential kernel")
+parser.add_argument("--noise_var", type=float, default = 0.005, help="noise we are adidng to the training covariance")
+parser.add_argument("--n_samples", type=float, default = 15, help="number of samples from the posterior distribution")
 args = parser.parse_args()
 
 print(args)
@@ -75,10 +76,9 @@ def fit_GP(X, y, Xtest, kernel, lengthscale, kernel_variance, noise_variance, pe
 ## parameters definition
 lengthscale = args.lengthscale # determines the lengths of the wiggle
 kernel_variance = args.output_var # scale factor
-noise_var = 0.005
-period = 3
+noise_var = args.noise_var
 n_test_point = 100
-n_samples = 15
+n_samples = args.n_samples
 Xtrain = []
 ytrain = []
 

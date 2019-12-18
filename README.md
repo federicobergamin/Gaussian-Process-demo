@@ -13,8 +13,7 @@ from the posterior distribution.
 ![alt text](readme_imgs/step_0.png "Prior distribution")
 
 
-2- With a single click on the open window yo uwill add a point and then we refit the GP
-showing the posterior distribution.
+2- With a single click on the open window yo uwill add a point and then we refit the GP showing the posterior distribution.
 ![alt text](readme_imgs/step_1.png "First sample")
 
 

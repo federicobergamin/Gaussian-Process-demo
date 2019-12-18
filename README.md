@@ -12,17 +12,22 @@ from the posterior distribution.
 1 - When you run the program, you get the prior distribution
 ![alt text](readme_imgs/step0.png "Prior distribution")
 
+
 2- With a single click on the open window yo uwill add a point and then we refit the GP
 showing the posterior distribution.
 ![alt text](readme_imgs/step1.png "First sample")
 
+
 3- You can do it for other steps
 ![alt text](readme_imgs/step2.png "Second sample")
+
 ![alt text](readme_imgs/step3.png "Third sample")
+
 
 4- With a double click you can sample from the posterior
 ![alt text](readme_imgs/posterior_samples.png "Posterior samples")
 
-####TODO: 
+
+**TODO**: 
 If one adds a lot of points then the hyperparameters of the GP are not optimize. Adding the optimization step make would make the
 interactive plot a bit slower, so I am still thinking about adding it. 

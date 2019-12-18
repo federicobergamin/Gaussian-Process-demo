@@ -17,12 +17,11 @@ import threading
 SINGLE_DOUBLE_CLICK_INTERVAL = 0.2
 t = None
 
-#TODO: implement argparse
 parser = argparse.ArgumentParser(description='GAUSSIAN PROCESS DEMO')
 parser.add_argument("--lengthscale", type=float, default=1, help="lengthscale parameter of the squared-exponential kernel")
 parser.add_argument("--output_var", type=float, default = 1, help="oputput variance of the squared-exponential kernel")
 parser.add_argument("--noise_var", type=float, default = 0.005, help="noise we are adidng to the training covariance")
-parser.add_argument("--n_samples", type=float, default = 15, help="number of samples from the posterior distribution")
+parser.add_argument("--n_samples", type=int, default = 15, help="number of samples from the posterior distribution")
 args = parser.parse_args()
 
 print(args)

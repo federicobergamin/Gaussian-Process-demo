@@ -10,22 +10,22 @@ from the posterior distribution.
 #### How it works
 
 1 - When you run the program, you get the prior distribution
-![alt text](readme_imgs/step_0.pdf "Prior distribution")
+![alt text](readme_imgs/step_0.png "Prior distribution")
 
 
 2- With a single click on the open window yo uwill add a point and then we refit the GP
 showing the posterior distribution.
-![alt text](readme_imgs/step_1.pdf "First sample")
+![alt text](readme_imgs/step_1.png "First sample")
 
 
 3- You can do it for other steps
-![alt text](readme_imgs/step_2.pdf "Second sample")
+![alt text](readme_imgs/step_2.png "Second sample")
 
-![alt text](readme_imgs/step_3.pdf "Third sample")
+![alt text](readme_imgs/step_3.png "Third sample")
 
 
 4- With a double click you can sample from the posterior
-![alt text](readme_imgs/step_posterior_4.pdf "Posterior samples")
+![alt text](readme_imgs/step_posterior_4.png "Posterior samples")
 
 
 **TODO**: 

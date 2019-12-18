@@ -107,7 +107,7 @@ def on_singleclick(event):
     plt.gca().fill_between(Xtest.flat, mu - 3 * var, mu + 3 * var,  color='lightblue', alpha=0.5)
     plt.plot(Xtest, mu, 'blue')
     plt.axis([-5, 5, -5, 5])
-    # plt.savefig('figs/step_{}.pdf'.format(step + 1))
+    plt.savefig('figs/step_{}'.format(step + 1))
     plt.draw() #redraw
     step +=1
     t = None
@@ -130,7 +130,7 @@ def on_dblclick(event):
     for sample_id in range(n_samples):
         plt.plot(Xtest, samples[sample_id])
     plt.axis([-5, 5, -5, 5])
-    # plt.savefig('figs/step_posterior_{}.pdf'.format(step + 1))
+    plt.savefig('figs/step_posterior_{}'.format(step + 1))
     plt.draw()  # redraw
     t = None
 
@@ -142,6 +142,6 @@ plt.gca().fill_between(Xtest.flat, mu - 2 * var, mu + 2 * var,  color='lightblue
 plt.plot(Xtest, mu, 'blue')
 plt.axis([-5, 5, -5, 5])
 fig.canvas.mpl_connect('button_press_event',onclick)
-# plt.savefig('figs/step_0.pdf')
+plt.savefig('figs/step_0')
 plt.show()
 plt.draw()
